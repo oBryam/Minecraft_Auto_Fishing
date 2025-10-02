@@ -5,7 +5,7 @@ import numpy
 import time
 from rich import print
 import os
-import keyboard  # <-- NOVO: Importado para a "kill switch"
+import keyboard
 
 # ------------------------------------------------------------
 
@@ -17,12 +17,12 @@ time.sleep(2)  # Pausa para o usuário se preparar
 
 # --- CONFIGURAÇÕES ---
 magicPhrase = "Fishing Bobber"
-# CORRIGIDO: Formato (esquerda, topo, LARGURA, ALTURA)
+# Formato (esquerda, topo, LARGURA, ALTURA)
 # Calcule a largura e altura corretas para a sua tela e resolução.
 screenRegion = (1400, 700, 500, 300)
 catchCount = 0
 
-# CORRIGIDO: gpu=False para maior compatibilidade. Mude para True apenas se tiver certeza.
+# gpu=False para maior compatibilidade. Mude para True apenas se tiver certeza.
 print("[grey58]Carregando modelo de reconhecimento de texto (EasyOCR)...[/grey58]")
 reader = easyocr.Reader(['en'], gpu=False)
 print("[bold green]Modelo carregado. Pesca iniciada![/bold green]")
@@ -31,7 +31,7 @@ print("[bold green]Modelo carregado. Pesca iniciada![/bold green]")
 pyautogui.click(button="right")  # Joga a primeira isca
 
 while True:
-    # NOVO: Verifica se a tecla 'i' foi pressionada para parar o script
+    # Verifica se a tecla 'i' foi pressionada para parar o script
     if keyboard.is_pressed('i'):
         print("\n[bold red]Script interrompido pelo usuário.[/bold red]")
         break
@@ -55,7 +55,6 @@ while True:
         catchCount += 1
         print(f"[grey89]Peixe fisgado! Total: [bold cyan]{catchCount}[/bold cyan]", end="\r")
 
-        # MELHORADO: Lógica de cliques mais limpa
         # 1. Puxa a linha
         pyautogui.click(button="right")
         # Pausa curta para o jogo processar a captura
@@ -70,5 +69,4 @@ while True:
 
 # ------------------------------------------------------------
 print("\nFinalizando o script.")
-# A linha abaixo agora é alcançável
 reader.close()
